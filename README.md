@@ -1,3 +1,4 @@
+[<img src='http://4.bp.blogspot.com/--wUe5Oz23Ow/U8w2OvRr1fI/AAAAAAAAG6c/w0o_FxM1z7Y/s1600/gitHub-download-button.png' />](https://github.com/yogonza524/HopfieldNetwork/releases/download/1.0/Hopfield-1.0.jar) <br />
 <img src='http://thales.cica.es/rd/Recursos/rd98/TecInfo/07/5-1.jpg' />
 <img src='https://upload.wikimedia.org/math/a/b/4/ab46c4ec598e884f2fdaf34f88ca73c8.png' />
 # Hopfield Network
