@@ -64,8 +64,8 @@ Weight Matrix
  0.0	    2.0	    0.0	    0.0	     0.0	    0.0	     -2.0	    0.0	   -2.0
  0.0	   -2.0	    0.0	    0.0	     0.0	    0.0	      2.0	   -2.0	    0.0
 
-Pattern result of test
-1.0	1.0	1.0	-1.0	1.0	-1.0	-1.0	1.0	-1.0
+Pattern result of test 
+ 1.0	    1.0     1.0     -1.0     1.0	   -1.0	     -1.0	    1.0     -1.0
 -------------------------
 The auxiliar vector is empty
 ```
