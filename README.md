@@ -10,7 +10,7 @@ MIT
 # Unit test
 ```java
      @Test
-     public void secondTest(){
+     public void HopfieldTest(){
          double[] p1 = new double[]{1.0, -1.0,1.0,-1.0,1.0,-1.0,1.0,-1.0,1.0};
          double[] p2 = new double[]{1.0, 1.0,1.0,-1.0,1.0,-1.0,-1.0,1.0,-1.0};
          double[] p3 = new double[]{1.0, 1.0,-1.0,-1.0,1.0,-1.0,-1.0,1.0,-1.0};
@@ -36,7 +36,7 @@ MIT
 ```
 After run the test we have the output like this
 ```
-Running MatrixTest
+Running HopfieldTest
 
 Connections of Network: 72
 
