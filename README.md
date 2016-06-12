@@ -69,3 +69,5 @@ Pattern result of test
 -------------------------
 The auxiliar vector is empty
 ```
+## Explanation
+When you call to test(double[] pattern) this method return a pattern present in patterns list (after training). If the result pattern of test is not equals NaN (for each value) then, the auxiliar vector will be empty, otherwise the auxiliar vector will be loaded with partial patterns until found the pattern or found a loop.
