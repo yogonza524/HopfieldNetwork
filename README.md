@@ -1,4 +1,4 @@
-Download the source library (.JAR) here
+Download the source library (.JAR) here <br />
 [<img src='http://4.bp.blogspot.com/--wUe5Oz23Ow/U8w2OvRr1fI/AAAAAAAAG6c/w0o_FxM1z7Y/s1600/gitHub-download-button.png' />](https://github.com/yogonza524/HopfieldNetwork/releases/download/1.0/Hopfield-1.0.jar) <br />
 or you can dounload the app with GUI here <br />
 [<img src='http://images.freecreatives.com/wp-content/uploads/2015/05/Download-button-1712111121111111.png' />](https://github.com/yogonza524/HopfieldNetwork/releases/download/1.0.1/HopfieldFX-1.0.jar) <br />
