@@ -1,3 +1,5 @@
+<img src='http://thales.cica.es/rd/Recursos/rd98/TecInfo/07/5-1.jpg' />
+<img src='https://upload.wikimedia.org/math/a/b/4/ab46c4ec598e884f2fdaf34f88ca73c8.png' />
 # Hopfield Network
 Java application for discret Hopfield Networks. Implementation for Artificial Intelligence
 
