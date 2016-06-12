@@ -23,18 +23,22 @@ MIT
          patterns.add(p2);
          
          Hopfield h = new Hopfield(9, new StepFunction());
-         h.train(patterns);
-         double[] result = h.test(p3);
-         System.out.println("\nConnections of Network: " + h.connections() + "\n");
+         
+         h.train(patterns); //train and load the Weight matrix
+         
+         double[] result = h.test(p3); //Test a pattern
+         
+         System.out.println("\nConnections of Network: " + h.connections() + "\n"); //show Neural connections
          System.out.println("Good recuperation capacity of samples: " + Hopfield.goodRecuperation(h.getWeights().length) + "\n");
          System.out.println("Perfect recuperation capacity of samples: " + Hopfield.perfectRacuperation(h.getWeights().length) + "\n");
          System.out.println("Energy: " + h.energy(result));
+         
          System.out.println("Weight Matrix");
          Matrix.showMatrix(h.getWeights());
          System.out.println("\nPattern result of test");
          Matrix.showVector(result);
         
-        h.showAuxVector();
+         h.showAuxVector();
      }
 ```
 After run the test we have the output like this
