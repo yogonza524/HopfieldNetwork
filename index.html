@@ -55,14 +55,30 @@
 				</ul>
 			</div>
 		</div>
-		<pre>
+		<!-- <pre>
 			<code class="java">
 	//Create the patterns examples for training
 	double[] pattern1 = new double[]{1.0, -1.0,1.0,-1.0,1.0,-1.0,1.0,-1.0,1.0};
 	double[] pattern2 = new double[]{1.0, 1.0,1.0,-1.0,1.0,-1.0,-1.0,1.0,-1.0};
 			</code>
+		</pre> -->
+		<h2>Import to your project</h2>
+		<p>
+			If you want to include the library in your Java project you can do so via Maven. Define the repository comfortably Jitpack to download the library from GitHub to your project. Then add the dependency as shown in the example
+		</p>
+		<pre>
+			<code id="xml">
+&lt;repository&gt;
+      &lt;id>jitpack.io&lt;/id&gt;
+      &lt;url>https://jitpack.io&lt;/url&gt;
+&lt;/repository&lt;&gt;
+&lt;dependency&lt;&gt;
+      &lt;groupId&gt;com.github.yogonza524&lt;/groupId&gt;
+      &lt;artifactId&gt;Hopfield&lt;/artifactId&gt;
+      &lt;version&gt;1.0&lt;/version&gt;
+&lt;/dependency&gt;
+			</code>
 		</pre>
-
 		<h2>Classes</h2>
 		<p>Here we have all classes used in the library</p>
 		<h3 id="hopfield">Hopfield</h3>
