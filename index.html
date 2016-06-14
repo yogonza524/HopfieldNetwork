@@ -27,6 +27,7 @@
 			  <li role="presentation"><a href="#import">I want to import to my own project</a></li>
 			  <li role="presentation"><a href="#classes">Show me the classes</a></li>
 			  <li role="presentation"><a href="#lunch">How to lunch</a></li>
+			  <li role="presentation"><a href="#test">Show me a test</a></li>
 			  <li role="presentation"><a href="ModelodeHopfield.pdf">Show me a practical problem</a></li>
 			</ul>
 	  </div>
@@ -89,6 +90,40 @@
 		<p>
 			If you decide to download the application with graphical environment (GUI ) you need to have installed the Java virtual machine . You can install it for your platform in <a href="http://www.oracle.com/technetwork/es/java/javase/downloads/jre7-downloads-1880261.html">Oracle Java Runtime Edition 7 page</a>
 		</p>
+		<h2 id="test">JUnit Test</h2>
+		<p>
+			Here we have a JUnit test, first we train the Hopfield network and after we test a pattern
+		</p>
+		<pre>
+			<code id="java">
+     @Test
+     public void hopfieldTest(){
+         double[] p1 = new double[]{1.0, -1.0,1.0,-1.0,1.0,-1.0,1.0,-1.0,1.0}; //for training
+         double[] p2 = new double[]{1.0, 1.0,1.0,-1.0,1.0,-1.0,-1.0,1.0,-1.0}; //for training
+
+         double[] p3 = new double[]{1.0, 1.0,-1.0,-1.0,1.0,-1.0,-1.0,1.0,-1.0}; /for test
+         
+         ArrayList<double[]> patterns = new ArrayList<>();
+         patterns.add(p1);
+         patterns.add(p2);
+         
+         Hopfield h = new Hopfield(9, new StepFunction());
+         h.train(patterns); //train with 2 patterns
+         double[] result = h.test(p3);
+         System.out.println("\nConnections of Network: " + h.connections() + "\n");
+         System.out.println("Good recuperation capacity of samples: " 
+         	+ Hopfield.goodRecuperation(h.getWeights().length) + "\n");
+         System.out.println("Perfect recuperation capacity of samples: " 
+         	+ Hopfield.perfectRacuperation(h.getWeights().length) + "\n");
+         System.out.println("Energy: " + h.energy(result));
+         Matrix.showMatrix(h.getWeights()); //show the Weight matrix
+         System.out.println("\nPattern result of test");
+         Matrix.showVector(result); //show the result, if the pattern was not recognized then every value is equals to NaN
+        
+         h.showAuxVector(); //Show the loop vector
+     }
+			</code>
+		</pre>
 		<h2 id="classes">Classes</h2>
 		<p>Here we have all classes used in the library</p>
 		<h3 id="hopfield">Hopfield</h3>
