@@ -26,6 +26,11 @@
 	  </div>
 	</div>
 	<div class="container">
+		<ul class="nav nav-pills">
+		  <li role="presentation"><a href="#import">I want to import to my own project</a></li>
+		  <li role="presentation"><a href="#classes">Show me the classes</a></li>
+		  <li role="presentation"><a href="#lunch">How to lunch</a></li>
+		</ul>
 		<h2>About the project</h2>
 		<p>
 			The source code was developed under the Java version 7. Development platform is Microsoft Windows 7 Professional Edition and NetBeans IDE 8.1 was used for development. Maven is used to manage the lifecycle of the project and versions
@@ -62,7 +67,7 @@
 	double[] pattern2 = new double[]{1.0, 1.0,1.0,-1.0,1.0,-1.0,-1.0,1.0,-1.0};
 			</code>
 		</pre> -->
-		<h2>Import to your project</h2>
+		<h2 id="import">Import to your project</h2>
 		<p>
 			If you want to include the library in your Java project you can do so via Maven. Define the repository comfortably Jitpack to download the library from GitHub to your project. Then add the dependency as shown in the example
 		</p>
@@ -79,7 +84,11 @@
 &lt;/dependency&gt;
 			</code>
 		</pre>
-		<h2>Classes</h2>
+		<h2 id="lunch">How to lunch the application</h2>
+		<p>
+			If you decide to download the application with graphical environment (GUI ) you need to have installed the Java virtual machine . You can install it for your platform in <a href="http://www.oracle.com/technetwork/es/java/javase/downloads/jre7-downloads-1880261.html">Oracle Java Runtime Edition 7 page</a>
+		</p>
+		<h2 id="classes">Classes</h2>
 		<p>Here we have all classes used in the library</p>
 		<h3 id="hopfield">Hopfield</h3>
 		<pre>
