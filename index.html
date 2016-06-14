@@ -96,32 +96,74 @@
 		</p>
 		<pre>
 			<code id="java">
-     @Test
-     public void hopfieldTest(){
-         double[] p1 = new double[]{1.0, -1.0,1.0,-1.0,1.0,-1.0,1.0,-1.0,1.0}; //for training
-         double[] p2 = new double[]{1.0, 1.0,1.0,-1.0,1.0,-1.0,-1.0,1.0,-1.0}; //for training
+ @Test
+ public void hopfieldTest(){
+     double[] p1 = new double[]{1.0, -1.0,1.0,-1.0,1.0,-1.0,1.0,-1.0,1.0}; //for training
+     double[] p2 = new double[]{1.0, 1.0,1.0,-1.0,1.0,-1.0,-1.0,1.0,-1.0}; //for training
 
-         double[] p3 = new double[]{1.0, 1.0,-1.0,-1.0,1.0,-1.0,-1.0,1.0,-1.0}; /for test
-         
-         ArrayList<double[]> patterns = new ArrayList<>();
-         patterns.add(p1);
-         patterns.add(p2);
-         
-         Hopfield h = new Hopfield(9, new StepFunction());
-         h.train(patterns); //train with 2 patterns
-         double[] result = h.test(p3);
-         System.out.println("\nConnections of Network: " + h.connections() + "\n");
-         System.out.println("Good recuperation capacity of samples: " 
-         	+ Hopfield.goodRecuperation(h.getWeights().length) + "\n");
-         System.out.println("Perfect recuperation capacity of samples: " 
-         	+ Hopfield.perfectRacuperation(h.getWeights().length) + "\n");
-         System.out.println("Energy: " + h.energy(result));
-         Matrix.showMatrix(h.getWeights()); //show the Weight matrix
-         System.out.println("\nPattern result of test");
-         Matrix.showVector(result); //show the result, if the pattern was not recognized then every value is equals to NaN
-        
-         h.showAuxVector(); //Show the loop vector
-     }
+     double[] p3 = new double[]{1.0, 1.0,-1.0,-1.0,1.0,-1.0,-1.0,1.0,-1.0}; //for test
+     
+     ArrayList<double[]> patterns = new ArrayList<>();
+     patterns.add(p1);
+     patterns.add(p2);
+     
+     Hopfield h = new Hopfield(9, new StepFunction());
+     h.train(patterns); //train with 2 patterns
+     double[] result = h.test(p3);
+     System.out.println("\nConnections of Network: " + h.connections() + "\n");
+     System.out.println("Good recuperation capacity of samples: " 
+     	+ Hopfield.goodRecuperation(h.getWeights().length) + "\n");
+     System.out.println("Perfect recuperation capacity of samples: " 
+     	+ Hopfield.perfectRacuperation(h.getWeights().length) + "\n");
+     System.out.println("Energy: " + h.energy(result));
+     Matrix.showMatrix(h.getWeights()); //show the Weight matrix
+     System.out.println("\nPattern result of test");
+     Matrix.showVector(result); //show the result, if the pattern was not recognized then every value is equals to NaN
+    
+     h.showAuxVector(); //Show the loop vector
+ }
+			</code>
+		</pre>
+		After run the test we have the next results
+		<pre>
+			<code>
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running HopfieldTest
+
+Connections of Network: 72
+
+Good recuperation capacity of samples: 1
+
+Perfect recuperation capacity of samples: 1
+
+Energy: -32.0
+ 0.0	   0.0	    2.0	   -2.0	   2.0	   -2.0	    0.0	    0.0	    0.0
+ 0.0	   0.0	    0.0	    0.0	   0.0	    0.0	   -2.0	    2.0	   -2.0
+ 2.0	   0.0	    0.0	   -2.0	   2.0	   -2.0	    0.0	    0.0	    0.0
+-2.0       0.0	   -2.0	    0.0   -2.0	    2.0	    0.0	    0.0	    0.0
+ 2.0	   0.0	    2.0	   -2.0	   0.0	   -2.0	    0.0	    0.0	    0.0
+-2.0       0.0	   -2.0	    2.0	  -2.0	    0.0	    0.0	    0.0	    0.0
+ 0.0	  -2.0	    0.0	    0.0	   0.0	    0.0	    0.0	   -2.0	    2.0
+ 0.0	   2.0	    0.0	    0.0	   0.0	    0.0	   -2.0	    0.0	   -2.0
+ 0.0	  -2.0	    0.0	    0.0	   0.0	    0.0	    2.0	   -2.0	    0.0
+
+Pattern result of test
+1.0	1.0	1.0	-1.0	1.0	-1.0	-1.0	1.0	-1.0
+-------------------------
+The auxiliar vector is empty
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.113 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+------------------------------------------------------------------------
+BUILD SUCCESS
+------------------------------------------------------------------------
+Total time: 2.344s
 			</code>
 		</pre>
 		<h2 id="classes">Classes</h2>
