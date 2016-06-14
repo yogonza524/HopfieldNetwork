@@ -19,26 +19,218 @@
 		  		The work is a Java implementation on a network of discrete type Hopield
 		  </p>
 		  <div class="btn-group" role="group" aria-label="...">
-			  <a href="#" class="btn btn-default">Download Library source</a>
-			  <a href="#" class="btn btn-default">Download GUI application</a>
-			  <a href="#" class="btn btn-default">View on GitHub</a>
+			  <a href="https://github.com/yogonza524/HopfieldNetwork/releases/download/1.0/Hopfield-1.0.jar" class="btn btn-default">Download Library source</a>
+			  <a href="https://github.com/yogonza524/HopfieldNetwork/releases/download/1.0.1/HopfieldFX-1.0.jar" class="btn btn-default">Download GUI application</a>
+			  <a href="https://github.com/yogonza524/HopfieldNetwork" class="btn btn-default">View on GitHub</a>
 			</div>
 	  </div>
 	</div>
 	<div class="container">
+		<h2>About the project</h2>
 		<p>
-			The library has the following classes:
-			<ul>
-				<li>Hopfield: for the network logic</li>
-				<li>Matrix: for the weight values for connections</li>
-				<li>Util: for support</li>
-			</ul>
+			The source code was developed under the Java version 7. Development platform is Microsoft Windows 7 Professional Edition and NetBeans IDE 8.1 was used for development. Maven is used to manage the lifecycle of the project and versions
 		</p>
+		<h2>Project structure</h2>
+		<div class="row">
+			<div class="col-sm-12 col-md-6 col-lg-4">
+				<img src="img/a.png" class="img-responsive" />
+			</div>
+			<div class="col-sm-12 col-md-6 col-lg-8">
+				<p>
+					The core package has the next classes
+				</p>
+				<ul>
+					<li>
+						<a href="#hopfield">Hopfield</a>: core class, implements the methods necessary for training and recognition of an input pattern distorted or known
+					</li>
+					<li>
+						IFunction: interface that defines the required method for calculating the activation function
+					</li>
+					<li>
+						Matrix: class needed to implement the matrix logic operations as well also between them and the vectors
+					</li>
+					<li>
+						StepFunction: iFunction class that implements the interface for a step function (-1 to 1)
+					</li>
+				</ul>
+			</div>
+		</div>
 		<pre>
 			<code class="java">
 	//Create the patterns examples for training
 	double[] pattern1 = new double[]{1.0, -1.0,1.0,-1.0,1.0,-1.0,1.0,-1.0,1.0};
 	double[] pattern2 = new double[]{1.0, 1.0,1.0,-1.0,1.0,-1.0,-1.0,1.0,-1.0};
+			</code>
+		</pre>
+
+		<h2>Classes</h2>
+		<p>Here we have all classes used in the library</p>
+		<h3 id="hopfield">Hopfield</h3>
+		<pre>
+			<code class="java">
+package com.core.hopfield;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+/**
+ *
+ * @author Gonza
+ */
+public class Hopfield {
+    
+    private double[][] W;
+    private final IFunction f;
+    private ArrayList<double[]> patterns;
+    private ArrayList<double[]> aux;
+
+    public ArrayList<double[]> getAux() {
+        return aux;
+    }
+
+    public ArrayList<double[]> getPatterns() {
+        return patterns;
+    }
+    
+    public Hopfield(int neurons, IFunction function) {
+            this.f = function;
+            this.W = new double[neurons][neurons];
+            initW();
+    }
+    
+    private void initW(){
+        for (int i = 0; i < W.length; i++) {
+            for (int j = 0; j < W.length; j++) {
+                this.W[i][j] = 0.0;
+            }
+        }
+    }
+    
+    public void train(ArrayList<double[]> patterns){
+        this.patterns = patterns;
+        Iterator<double[]> i = patterns.iterator();
+        while(i.hasNext()){
+            if (i.next().length != this.W.length) {
+                throw new IndexOutOfBoundsException("All patterns must have " + this.W.length + " dimensions");
+            }
+        }
+        i = patterns.iterator();
+        while(i.hasNext()){
+            double[] v = i.next();
+            double[][] wAux = Matrix.subtract(Matrix.multiply(v, v), Matrix.identity(this.W.length));
+            this.W = Matrix.add(W, wAux);
+        }
+    }
+    
+    public double[] test(double[] pattern){
+        boolean found = false;
+        boolean loop = false;
+        if (pattern.length != this.W.length) {
+            throw new IndexOutOfBoundsException("The pattern doesn't have " + this.W.length + " dimensions");
+        }
+        double[] result = pattern;
+        aux = new ArrayList<>();
+        while(!found && !loop){
+            result = f.calculate(Matrix.multiply(W, result));
+            if (!this.contains(result, patterns)) {
+                //The result wasn't in the pattern list
+                if (!this.contains(result, aux)) {
+                    //There are not loops
+                    aux.add(result);
+                }
+                else{
+                    loop = true; //loop found, result exists in aux list
+                }
+            }
+            else{
+                found = true; //pattern equals result, found in patterns list
+            }
+        }
+        if (!found) {
+            for (int i = 0; i < pattern.length; i++) {
+                result[i] = Double.NaN;
+            }
+        }
+        return result;
+    }
+    
+    public double energy(double[] patterns){
+        double[] result = this.test(patterns);
+        double energy = Double.MIN_VALUE;
+        for (int i = 0; i < result.length; i++) {
+            if (result[i] == Double.NaN) {
+                break;
+            }
+        }
+        for (int i = 0; i < this.W.length; i++) {
+            for (int j = 0; j < this.W.length; j++) {
+                energy += -0.5 * this.W[i][j] * result[i] * result[j];
+            }
+        }
+        return energy;
+    }
+    
+    private boolean contains(double[] pattern, ArrayList<double[]> patterns){
+        boolean output = false;
+        for (int i = 0; i < patterns.size(); i++) {
+             if (Matrix.equals(pattern, patterns.get(i))) {
+                 output = true;
+                 break;
+             }
+         }
+        return output;
+    }
+    
+    public void showWeights(){
+        Matrix.showMatrix(W);
+    }
+    
+    public double[][] getWeights(){
+        return this.W;
+    }
+    
+    public void showAuxVector(){
+        System.out.println("-------------------------");
+        if (!this.aux.isEmpty()) {
+            System.out.println("Auxiliar vector for loop inside the test");
+            for (int i = 0; i < aux.size(); i++) {
+                System.out.println("Iteration " + i);
+                Matrix.showVector(aux.get(i));
+            }
+        }
+        else{
+            System.out.println("The auxiliar vector is empty");
+        }
+    }
+    
+    public String getAuxVector(){
+        String result = "-------------------------\n";
+        if (this.aux != null &&!this.aux.isEmpty()) {
+            result += "Auxiliar vector for loop inside the test\n";
+            for (int i = 0; i < aux.size(); i++) {
+                result += "Iteration " + i + ": \t";
+                result += Matrix.getVector(aux.get(i)) + "\n";
+            }
+        }
+        else{
+            result += "The auxiliar vector is empty";
+        }
+        return result;
+    }
+    
+    public static int goodRecuperation(int neurons){
+        return (int)(0.138 * neurons);
+    }
+    
+    public static int perfectRacuperation(int neurons){
+        return (int)(neurons / (4 * Math.log(neurons)));
+    }
+    
+    public int connections(){
+        return this.W.length * (this.W.length - 1);
+    }
+}
+
 			</code>
 		</pre>
 	</div>
